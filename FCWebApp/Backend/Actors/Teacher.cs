@@ -19,8 +19,8 @@ namespace FCBackend.Actors
             }
         }
 
-        public Teacher(ulong id, string teacherID, string alias, string password, string phone, string email)
-            : base(id, alias, teacherID, password, phone, email)
+        public Teacher(ulong id, string teacherID, string alias, string password, string email)
+            : base(id, alias, teacherID, password, email)
         { }
 
         public static Teacher Create(string alias, string teacherID, string password, string email)
@@ -33,7 +33,7 @@ namespace FCBackend.Actors
             }
 
             // new Teacher instance
-            return new Teacher(id, alias, teacherID, password, null, email);
+            return new Teacher(id, alias, teacherID, password, email);
         }
 
         public static ulong GetIdByTeacherId(string teacherId)

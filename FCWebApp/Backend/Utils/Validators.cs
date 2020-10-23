@@ -23,11 +23,5 @@ namespace FCBackend.Utils
             // TODO - email validation
             return email.Length >= 5;
         }
-
-        public static bool ValidatePhone(string phone)
-        {
-            // TODO - phone validation
-            return phone.Length >= 5;
-        }
     }
 }

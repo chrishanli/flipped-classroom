@@ -7,8 +7,8 @@ namespace FCBackend.Actors
 {
     class Administrator: Person
     {
-        public Administrator(ulong id, string alias, string username, string password, string phone, string email)
-            : base(id, alias, username, password, phone, email)
+        public Administrator(ulong id, string alias, string username, string password, string email)
+            : base(id, alias, username, password, email)
         { }
 
         public Teacher CreateTeacher(string teacherID, string password, string alias, string email)
@@ -19,7 +19,7 @@ namespace FCBackend.Actors
                 return null;
             }
 
-            // try create teacher
+            // try create a new teacher object
             Teacher teacher = Teacher.Create(alias, teacherID, password, email);
             // TODO - duplicate teachers
             if (teacher == null)
@@ -30,17 +30,16 @@ namespace FCBackend.Actors
             return teacher;
         }
 
-        public bool ChangePersonInfo(ulong id, string alias, string username, string phone, string email)
+        public bool ChangePersonInfo(ulong id, string alias, string username, string email)
         {
             if (!Validators.ValidateUsername(username) ||
-                !Validators.ValidatePhone(phone) ||
                 !Validators.ValidateEmail(email))
             {
                 return false;
             }
 
             // change info
-            return ChangeInfoById(id, username, phone, email, alias);
+            return ChangeInfoById(id, username, email, alias);
         }
 
         public bool ChangePersonPassword(ulong id, string password)

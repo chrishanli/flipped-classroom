@@ -15,7 +15,6 @@ namespace FCBackend.Actors
         string username;
         string alias;
         string password;
-        string phone;
         string email;
         PersonStatus status;
 
@@ -50,16 +49,6 @@ namespace FCBackend.Actors
             }
         }
 
-        public string Phone
-        {
-            get { return phone; }
-            set
-            {
-                // TODO - validate
-                phone = value;
-            }
-        }
-
         public string Email
         {
             get { return email; }
@@ -70,16 +59,15 @@ namespace FCBackend.Actors
             }
         }
 
-        protected Person(ulong id, string alias, string username, string password, string phone, string email)
+        protected Person(ulong id, string alias, string username, string password, string email)
         {
             Id = id;
             Username = username;
             Password = password;
-            Phone = phone;
             Email = email;
         }
 
-        public static bool ChangeInfoById(ulong id, string username, string phone, string email, string alias)
+        public static bool ChangeInfoById(ulong id, string username, string email, string alias)
         {
             return PersonDao.ChangePersonInfo(id, username, email, phone, alias);
         }
