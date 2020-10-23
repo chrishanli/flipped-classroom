@@ -15,11 +15,11 @@ namespace FCBackend.Dao
             string teacherID, string password, string alias, string email)
         {
             // TODO - insert; fetch auto-increment ids
-            persons.Add(new Teacher(++id, teacherID, alias, password, null, email));
+            persons.Add(new Teacher(++id, teacherID, alias, password, email));
             return id;
         }
 
-        static public bool ChangePersonInfo(ulong id, string username, string email, string phone, string alias)
+        static public bool ChangePersonInfo(ulong id, string username, string email, string alias)
         {
             // TODO - change person info in db
             if (id <= 0 || id > (ulong)persons.Count)
@@ -30,7 +30,6 @@ namespace FCBackend.Dao
             Person person = persons[(int)id];
             person.Alias = alias;
             person.Email = email;
-            person.Phone = phone;
             person.Username = username;
             return true;
         }

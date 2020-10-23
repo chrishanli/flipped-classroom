@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace FCWebApp.Pages
 {
-    public partial class Welcome : System.Web.UI.Page
+    public partial class UserManagementPage : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -1,5 +1,8 @@
 
-bin
-obj
 .vs
 packages
+*/bin
+*/obj
+*/Scripts
+*/fonts
+*/Content

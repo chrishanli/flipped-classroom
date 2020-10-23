@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
+using System.Web.Routing;
+using System.Web.Optimization;
 
 namespace FCWebApp
 {
@@ -11,6 +13,9 @@ namespace FCWebApp
     {
         protected void Application_Start(object sender, EventArgs e)
         {
+            // Code that runs on application startup
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }

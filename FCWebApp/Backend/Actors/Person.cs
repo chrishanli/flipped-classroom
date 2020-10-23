@@ -69,7 +69,7 @@ namespace FCBackend.Actors
 
         public static bool ChangeInfoById(ulong id, string username, string email, string alias)
         {
-            return PersonDao.ChangePersonInfo(id, username, email, phone, alias);
+            return PersonDao.ChangePersonInfo(id, username, email, alias);
         }
 
         public static bool ChangePasswordById(ulong id, string password)
