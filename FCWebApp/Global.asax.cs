@@ -6,6 +6,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Routing;
 using System.Web.Optimization;
+using FCBackend.Dao;
 
 namespace FCWebApp
 {
@@ -16,6 +17,9 @@ namespace FCWebApp
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            // prepare data
+            PersonDao.FetchAllPerson();
         }
     }
 }

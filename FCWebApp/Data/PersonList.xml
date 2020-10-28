@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<persons>
+  <person type="teacher">
+    <username>19720182203919</username>
+    <alias>李小野</alias>
+    <password>lihan</password>
+    <email>han@han-li.cn</email>
+    <status>NORMAL</status>
+  </person>
+  <person type="student">
+    <username>123456789</username>
+    <alias>李大力</alias>
+    <password>lllll</password>
+    <email>ldl@han-li.cn</email>
+    <status>FORBIDDEN</status>
+  </person>
+</persons>

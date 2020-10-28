@@ -62,6 +62,7 @@ namespace FCBackend.Actors
         protected Person(ulong id, string alias, string username, string password, string email)
         {
             Id = id;
+            Alias = alias;
             Username = username;
             Password = password;
             Email = email;
