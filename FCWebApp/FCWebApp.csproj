@@ -25,6 +25,7 @@
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>3.2</TypeScriptToolsVersion>
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -283,6 +284,7 @@
     <Compile Include="Backend\Actors\Student.cs" />
     <Compile Include="Backend\Actors\Teacher.cs" />
     <Compile Include="Backend\Dao\PersonDao.cs" />
+    <Compile Include="Backend\Database\DBUtils.cs" />
     <Compile Include="Backend\Utils\Validators.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

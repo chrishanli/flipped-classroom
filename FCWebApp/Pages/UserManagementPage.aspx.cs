@@ -30,6 +30,8 @@ namespace FCWebApp.Pages
         void refreshUserTable()
         {
             this.TableUsers.Rows.Clear();
+            PersonDao.FetchAllPerson();
+
             TableHeaderRow th = new TableHeaderRow();
             TableHeaderCell thro = new TableHeaderCell();
             thro.Text = "Role";
@@ -69,13 +71,54 @@ namespace FCWebApp.Pages
 
                 TableCell controls = new TableCell();
                 Button delButton = new Button();
+                delButton.Click += new EventHandler((obj, args) =>
+                {
+                    if (Person.DeletePersonById(p.Id))
+                    {
+                        Response.Write("<div class=\"alert alert-success alert-dismissable\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>" +
+                            "Delete succeessfully." +
+                            "</div>");
+                        refreshUserTable();
+                    } else
+                    {
+                        // wrong
+                        Response.Write("<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>" +
+                            "Error occurred." +
+                            "</div>");
+                    }
+                });
                 delButton.CssClass = "btn btn-danger";
                 delButton.Style.Add("margin-right", "5px");
                 delButton.Text = "Delete";
                 controls.Controls.Add(delButton);
+
                 Button editButton = new Button();
                 editButton.CssClass = "btn btn-primary";
                 editButton.Text = "Edit";
+                editButton.Attributes.Add("data-toggle", "modal");
+                editButton.Attributes.Add("data-target", "#editUserModal");
+                editButton.Click += new EventHandler((obj, args) =>
+                {
+                    TxtTeacherStuId.Value = p.Username;
+                    TxtEmail.Value = p.Email;
+                    TxtName.Value = p.Alias;
+                    BtnSubmitEdit.Click += new EventHandler((o, e) =>
+                    {
+                        if (Person.ChangeInfoById(p.Id, TxtTeacherStuId.Value, TxtEmail.Value, TxtName.Value))
+                        {
+                            Response.Write("<div class=\"alert alert-success alert-dismissable\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>" +
+                            "Edit succeessfully." +
+                            "</div>");
+                            refreshUserTable();
+                        } else
+                        {
+                            // wrong
+                            Response.Write("<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>" +
+                                "Error occurred." +
+                                "</div>");
+                        }
+                    });
+                });
                 controls.Controls.Add(editButton);
                 tr.Cells.Add(controls);
 
@@ -90,11 +133,25 @@ namespace FCWebApp.Pages
             string pass = this.InputNewPassword.Value;
             string email = this.InputNewEmail.Value;
 
-            Teacher teacher = Teacher.Create(name, teacherId, pass, email);
-            if (teacher != null)
+            if (Administrator.CreateTeacher(teacherId, pass, name, email))
             {
+                Response.Write("<div class=\"alert alert-success alert-dismissable\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>" +
+                    "Insert succeessfully." +
+                    "</div>");
                 refreshUserTable();
             }
+            else
+            {
+                // wrong
+                Response.Write("<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>" +
+                    "Error occurred." +
+                    "</div>");
+            }
+        }
+
+        protected void BtnSubmitThisEdit()
+        {
+
         }
     }
 }

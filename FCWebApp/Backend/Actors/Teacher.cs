@@ -23,19 +23,6 @@ namespace FCBackend.Actors
             : base(id, alias, teacherID, password, email)
         { }
 
-        public static Teacher Create(string alias, string teacherID, string password, string email)
-        {
-            // database manipulations
-            ulong id = PersonDao.InsertTeacher(teacherID, password, alias, email);
-            if (id == 0)
-            {
-                return null;
-            }
-
-            // new Teacher instance
-            return new Teacher(id, alias, teacherID, password, email);
-        }
-
         public static ulong GetIdByTeacherId(string teacherId)
         {
             return PersonDao.SelectIdByUsername(teacherId);

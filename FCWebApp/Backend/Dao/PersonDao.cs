@@ -1,6 +1,8 @@
 ﻿using FCBackend.Actors;
+using FCWebApp.Backend.Database;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -20,46 +22,69 @@ namespace FCBackend.Dao
 
         static public bool FetchAllPerson()
         {
-            XmlDocument doc = new XmlDocument();
-            XmlReaderSettings settings = new XmlReaderSettings();
-            settings.IgnoreComments = true;
-            XmlReader reader = XmlReader.Create(@"E:\Han\Git Repositories\flipped-classroom\FCWebApp\Data\PersonList.xml");
-            doc.Load(reader);
-            // to fetch the root node
-            XmlNode rn = doc.SelectSingleNode("persons");
-            // to fetch all children of the root node
-            XmlNodeList xnl = rn.ChildNodes;
-            foreach (XmlNode personNode in xnl)
+            persons.Clear();
+            // connect to sql
+            SqlConnection conn = DBUtils.GetConnection();
+            conn.Open();
+            string sql = "SELECT [type], [id], [username], [alias], [email], [status] FROM [fc_user]";
+            SqlCommand comm = new SqlCommand(sql, conn);
+            SqlDataReader reader = comm.ExecuteReader();
+
+            // perform reading
+            while (reader.Read())
             {
-                XmlNodeList childs = personNode.ChildNodes;
-                string type = ((XmlElement)personNode).GetAttribute("type").ToString();
-                string username = childs.Item(0).InnerText;
-                string alias = childs.Item(1).InnerText;
-                string password = childs.Item(2).InnerText;
-                string email = childs.Item(3).InnerText;
-                string status = childs.Item(4).InnerText; // TODO
+                string type = reader[0].ToString();
+                ulong id = UInt64.Parse(reader[1].ToString());
+                string username = reader[2].ToString();
+                string alias = reader[3].ToString();
+                string email = reader[4].ToString();
+                string status = reader[5].ToString(); // TODO
                 switch (type)
                 {
-                    case "teacher":
-                        Teacher teacher = new Teacher(++id, username, alias, password, email);
+                    case "TC":
+                        Teacher teacher = new Teacher(id, username, alias, null, email);
                         persons.Add(teacher);
                         break;
-                    case "student":
-                        Student stu = new Student(++id, username, alias, password, email);
+                    case "ST":
+                        Student stu = new Student(id, username, alias, null, email);
                         persons.Add(stu);
                         break;
                 }
             }
+
+            // close connection
+            conn.Close();
             return true;
         }
 
-        static public ulong InsertTeacher(
+        static public bool InsertTeacher(
             string teacherID, string password, string alias, string email)
         {
-            // TODO - insert; fetch auto-increment ids
-            persons.Add(new Teacher(++id, teacherID, alias, password, email));
-            // https://www.cnblogs.com/joean/p/4985348.html
-            return id;
+            // connect to sql server
+            SqlConnection conn = DBUtils.GetConnection();
+            string sql = String.Format(
+                "INSERT INTO [fc_user] ([type], [username], [password], [alias], [email], [status]) VALUES" +
+                "('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')"
+                , "TC", teacherID, password, alias, email, "NM"
+            );
+
+            // try perform insert
+            try
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand(sql, conn);
+                if (comm.ExecuteNonQuery() > 0)
+                {
+                    return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
+            return false;
         }
 
         static public ulong InsertStudent(
@@ -72,36 +97,85 @@ namespace FCBackend.Dao
 
         static public bool ChangePersonInfo(ulong id, string username, string email, string alias)
         {
-            // TODO - change person info in db
-            if (id <= 0 || id > (ulong)persons.Count)
+            // connect to sql server
+            SqlConnection conn = DBUtils.GetConnection();
+            string sql = String.Format(
+                "UPDATE TABLE [fc_user] SET [username]='{0}', [alias]='{1}', [email]='{2}' WHERE id={3}"
+                , username, alias, email, id
+            );
+
+            // try perform insert
+            try
             {
+                conn.Open();
+                SqlCommand comm = new SqlCommand(sql, conn);
+                if (comm.ExecuteNonQuery() > 0)
+                {
+                    return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
                 return false;
             }
-            // change
-            Person person = persons[(int)id];
-            person.Alias = alias;
-            person.Email = email;
-            person.Username = username;
-            return true;
+
+            return false;
         }
 
         static public bool ChangePersonPassword(ulong id, string password)
         {
-            // TODO - change person pw in db
-            if (id <= 0 || id > (ulong)persons.Count)
+            // connect to sql server
+            SqlConnection conn = DBUtils.GetConnection();
+            string sql = String.Format(
+                "UPDATE TABLE [fc_user] SET [password]='{0}' WHERE id={1}"
+                , password, id
+            );
+
+            // try perform insert
+            try
             {
+                conn.Open();
+                SqlCommand comm = new SqlCommand(sql, conn);
+                if (comm.ExecuteNonQuery() > 0)
+                {
+                    return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
                 return false;
             }
-            // change
-            Person person = persons[(int)id];
-            person.Password = password;
-            return true;
+
+            return false;
         }
 
         static public bool DeletePerson(ulong id)
         {
-            // delete user;
-            return true;
+            // connect to sql server
+            SqlConnection conn = DBUtils.GetConnection();
+            string sql = String.Format(
+                "DELETE FROM [fc_user] WHERE id={0}", id
+            );
+
+            // try perform insert
+            try
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand(sql, conn);
+                if (comm.ExecuteNonQuery() > 0)
+                {
+                    return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
+            return false;
         }
 
         static public string SelectUsername(ulong id)
