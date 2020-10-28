@@ -31,6 +31,9 @@ namespace FCWebApp.Pages
         {
             this.TableUsers.Rows.Clear();
             TableHeaderRow th = new TableHeaderRow();
+            TableHeaderCell thro = new TableHeaderCell();
+            thro.Text = "Role";
+            th.Cells.Add(thro);
             TableHeaderCell thun = new TableHeaderCell();
             thun.Text = "Student Id / Teacher Id";
             th.Cells.Add(thun);
@@ -48,6 +51,10 @@ namespace FCWebApp.Pages
             foreach (Person p in PersonDao.PersonList)
             {
                 TableRow tr = new TableRow();
+                TableCell role = new TableCell();
+                role.Text = p is Teacher ? "Teacher" : "Student";
+                tr.Cells.Add(role);
+
                 TableCell username = new TableCell();
                 username.Text = p.Username;
                 tr.Cells.Add(username);
@@ -73,6 +80,20 @@ namespace FCWebApp.Pages
                 tr.Cells.Add(controls);
 
                 this.TableUsers.Rows.Add(tr);
+            }
+        }
+
+        protected void ButtonSubmit_Click(object sender, EventArgs e)
+        {
+            string teacherId = this.InputNewTeacherID.Value;
+            string name = this.InputNewName.Value;
+            string pass = this.InputNewPassword.Value;
+            string email = this.InputNewEmail.Value;
+
+            Teacher teacher = Teacher.Create(name, teacherId, pass, email);
+            if (teacher != null)
+            {
+                refreshUserTable();
             }
         }
     }

@@ -5,18 +5,20 @@
         <h2>User Management</h2>
 
         <div class="row" style="margin-top: 20px">
-            <div class="col-xs-3 col-sm-2">
-                <asp:LinkButton ID="RefreshListButton" runat="server" OnClick="RefreshListButton_Click" CssClass="btn btn-default">
+            <div class="col-xs-1 col-sm-1" style="margin-right: 10px">
+                <asp:LinkButton ID="RefreshListButton" runat="server" OnClick="RefreshListButton_Click" CssClass="btn btn-primary">
                     Refresh List
                 </asp:LinkButton>
             </div>
-            <div class="col-xs-3 col-sm-2">
-                <asp:LinkButton ID="AddUserButton" runat="server" OnClick="AddUserButton_Click" CssClass="btn btn-default">
+            <div class="col-xs-1 col-sm-1">
+                <%--<asp:LinkButton ID="AddUserButton" runat="server" OnClick="AddUserButton_Click" CssClass="btn btn-warning">
+                    Add Teacher
+                </asp:LinkButton>--%>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addUserModal">
                     Add User
-                </asp:LinkButton>
+                </button>
             </div>
         </div>
-
         <div class="row" style="margin: 20px 0 0 0">
             <asp:Table ID="TableUsers" runat="server" CssClass="table table-striped table-bordered table-hover">
                 <asp:TableHeaderRow>
@@ -27,5 +29,45 @@
                 </asp:TableHeaderRow>
             </asp:Table>
         </div>
+    </div>
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="form-group">
+                            <label for="InputNewTeacherID">Teacher ID</label>
+                            <input type="text" runat="server" class="form-control" id="InputNewTeacherID" placeholder="Teacher ID">
+                        </div>
+                        <div class="form-group">
+                            <label for="InputNewName">Full Name</label>
+                            <input type="text" runat="server" class="form-control" id="InputNewName" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="InputNewPassword">Password (Default is 123456)</label>
+                            <input type="password" runat="server" class="form-control" id="InputNewPassword" placeholder="Password" value="123456">
+                        </div>
+                        <div class="form-group">
+                            <label for="InputNewEmail">Email</label>
+                            <input type="email" runat="server" class="form-control" id="InputNewEmail" placeholder="Email">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <asp:LinkButton ID="LinkButtonSubmit" runat="server" OnClick="ButtonSubmit_Click" CssClass="btn btn-primary">
+                        Submit
+                    </asp:LinkButton>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
     </div>
 </asp:Content>

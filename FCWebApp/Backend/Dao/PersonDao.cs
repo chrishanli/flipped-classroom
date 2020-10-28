@@ -58,6 +58,7 @@ namespace FCBackend.Dao
         {
             // TODO - insert; fetch auto-increment ids
             persons.Add(new Teacher(++id, teacherID, alias, password, email));
+            // https://www.cnblogs.com/joean/p/4985348.html
             return id;
         }
 

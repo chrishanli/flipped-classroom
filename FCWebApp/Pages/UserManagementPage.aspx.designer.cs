@@ -22,15 +22,6 @@ namespace FCWebApp.Pages {
         protected global::System.Web.UI.WebControls.LinkButton RefreshListButton;
         
         /// <summary>
-        /// AddUserButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton AddUserButton;
-        
-        /// <summary>
         /// TableUsers control.
         /// </summary>
         /// <remarks>
@@ -38,5 +29,50 @@ namespace FCWebApp.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table TableUsers;
+        
+        /// <summary>
+        /// InputNewTeacherID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText InputNewTeacherID;
+        
+        /// <summary>
+        /// InputNewName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText InputNewName;
+        
+        /// <summary>
+        /// InputNewPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword InputNewPassword;
+        
+        /// <summary>
+        /// InputNewEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl InputNewEmail;
+        
+        /// <summary>
+        /// LinkButtonSubmit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButtonSubmit;
     }
 }

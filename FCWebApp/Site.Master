@@ -11,13 +11,12 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
 <body>
     <form runat="server">
-
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -34,7 +33,14 @@
                 </div>
             </div>
         </div>
-        
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+            <hr />
+            <footer>
+                <p>© <%: DateTime.Now.Year %> - Han Li Studios</p>
+            </footer>
+        </div>
+
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -55,14 +61,6 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-
-        <div class="container body-content">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-            <hr />
-            <footer>
-                <p>© <%: DateTime.Now.Year %> - Han Li Studios</p>
-            </footer>
-        </div>
     </form>
 </body>
 
