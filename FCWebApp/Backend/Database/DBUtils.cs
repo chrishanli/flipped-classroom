@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using MySql.Data.MySqlClient;
 
 namespace FCWebApp.Backend.Database
 {
     public class DBUtils
     {
-        static public readonly string connStr = System.Configuration.ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
-        public static SqlConnection GetConnection()
+        static public readonly string connStr = System.Configuration.ConfigurationManager.ConnectionStrings["hanPublicMySQLConnectionString"].ConnectionString;
+        public static MySqlConnection GetConnection()
         {
-            SqlConnection conn = new SqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(connStr);
             return conn;
         }
     }

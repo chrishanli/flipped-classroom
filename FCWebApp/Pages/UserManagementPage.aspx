@@ -20,14 +20,18 @@
             </div>
         </div>
         <div class="row" style="margin: 20px 0 0 0">
-            <asp:Table ID="TableUsers" runat="server" CssClass="table table-striped table-bordered table-hover">
-                <asp:TableHeaderRow>
-                    <asp:TableHeaderCell>Student ID / Teacher ID</asp:TableHeaderCell>
-                    <asp:TableHeaderCell>Name</asp:TableHeaderCell>
-                    <asp:TableHeaderCell>Email</asp:TableHeaderCell>
-                    <asp:TableHeaderCell>Operations</asp:TableHeaderCell>
-                </asp:TableHeaderRow>
-            </asp:Table>
+            <asp:GridView ID="GridViewUsers" runat="server" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="HanLiPublicMySQL" CssClass="table table-striped table-bordered table-hover">
+                <Columns>
+                    <asp:BoundField DataField="type" HeaderText="Type" SortExpression="type" />
+                    <asp:BoundField DataField="id" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="id" Visible="false"/>
+                    <asp:BoundField DataField="username" HeaderText="Student/Teacher ID" SortExpression="username" />
+                    <asp:BoundField DataField="alias" HeaderText="Name" SortExpression="alias" />
+                    <asp:BoundField DataField="email" HeaderText="Email" SortExpression="email" />
+                    <asp:BoundField DataField="status" HeaderText="Status" SortExpression="status" />
+                    <asp:CommandField HeaderText="Operation" ShowEditButton="True" ShowDeleteButton="True" />
+                </Columns>
+            </asp:GridView>
+            <asp:SqlDataSource ID="HanLiPublicMySQL" runat="server" ConnectionString="<%$ ConnectionStrings:hanPublicMySQLConnectionString %>" ProviderName="<%$ ConnectionStrings:hanPublicMySQLConnectionString.ProviderName %>" SelectCommand="SELECT type, id, username, alias, email, status FROM fc_user" DeleteCommand="DELETE FROM fc_user WHERE id=@id" UpdateCommand="UPDATE fc_user SET username = @username, alias = @alias, email =@email, status =@status WHERE id=@id"></asp:SqlDataSource>
         </div>
     </div>
 

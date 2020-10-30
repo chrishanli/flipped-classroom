@@ -68,19 +68,5 @@ namespace FCBackend.Actors
             Email = email;
         }
 
-        public static bool ChangeInfoById(ulong id, string username, string email, string alias)
-        {
-            return PersonDao.ChangePersonInfo(id, username, email, alias);
-        }
-
-        public static bool ChangePasswordById(ulong id, string password)
-        {
-            return PersonDao.ChangePersonPassword(id, password);
-        }
-
-        public static bool DeletePersonById(ulong id)
-        {
-            return PersonDao.DeletePerson(id);
-        }
     }
 }

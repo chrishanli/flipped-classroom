@@ -17,9 +17,6 @@ namespace FCWebApp
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            // prepare data
-            PersonDao.FetchAllPerson();
         }
     }
 }
