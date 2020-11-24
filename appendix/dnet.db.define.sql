@@ -67,9 +67,20 @@ CREATE TABLE fc_group (
     name varchar(255) not null,
     course_id bigint not null,
     class_num tinyint not null,
+    leader_id bigint not null,
     -- Status: norMal, Dismissed
     status enum('M', 'D') not null,
-    foreign key(course_id) references `fc_course`(id)
+    foreign key(course_id) references `fc_course`(id),
+    foreign key(leader_id) references `fc_user`(id)
+) engine=MyISAM;
+
+-- Group Attend Table
+DROP TABLE IF EXISTS `fc_group_attend`;
+CREATE TABLE fc_group_attend (
+    stu_id bigint not null,
+    group_id bigint not null,
+    foreign key(stu_id) references `fc_user`(id),
+    foreign key(group_id) references `fc_group`(id)
 ) engine=MyISAM;
 
 -- 选课表
@@ -132,5 +143,28 @@ VALUES ('ST', '2010101010', 'mingqiu', 'Ming Qiu', 'mingqiu@xmu.edu.cn', 'F');
 INSERT INTO fc_user (type, username, password, alias, email, status)
 VALUES ('ST', '2020202020', '123456', 'Qingqiang Wu', 'wuqq@xmu.edu.cn', 'N');
 
+INSERT INTO fc_user (type, username, password, alias, email, status)
+VALUES ('ST', '2020204040', '8888', 'Hongji Wang', 'whj@xmu.edu.cn', 'M');
+
 INSERT INTO fc_admin (username, password, status)
 VALUES ('han', 'lihan', 'M');
+
+insert into fc_course (name, description, weight_speak, weight_report, weight_ask, grouping_regulation_id, status) 
+values('OOAD', 'QMQMQMQMQM I am QM', 20, 30, 40, null, 'M');
+
+insert into fc_course (id, name, description, weight_speak, weight_report, weight_ask, grouping_regulation_id, status) 
+values('JAVAEE', 'QMQMQMQMQM I am QM', 20, 30, 40, null, 'M');
+
+insert into fc_select(course_id, stu_id, class_num, group_id) values(1, 2, 1, null);
+
+insert into fc_discuss(course_id, topic, serial_num, signin_start_time, signin_end_time, contents) 
+values(1, 'How to get GPA4', 1, 1606218857, 1606439560, 'heheda');
+
+insert into fc_group(name, course_id, class_num, leader_id, status) 
+values('I want 4.0', 1, 1, 4, 'M');
+
+insert into fc_group_attend(stu_id, group_id) 
+values(4, 1);
+
+insert into fc_discuss_signin(discuss_id, group_id, signin_time)
+values(1, 1, 111);

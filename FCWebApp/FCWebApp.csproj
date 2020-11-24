@@ -160,6 +160,8 @@
     <Content Include="Data\PersonList.xml" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="packages.config" />
+    <Content Include="Pages\CourseHomePage.aspx" />
+    <Content Include="Pages\DiscussionHomePage.aspx" />
     <Content Include="Pages\PlatformSettingsPage.aspx" />
     <Content Include="Pages\StudentHomePage.aspx" />
     <Content Include="Pages\UserManagementPage.aspx" />
@@ -180,6 +182,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Pages\Services\CourseHandler.ashx" />
+    <Content Include="Pages\Services\DiscussHandler.ashx" />
     <None Include="Scripts\jquery-3.5.1-vsdoc.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -305,6 +309,7 @@
     <Content Include="Scripts\jquery-3.5.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.5.1.min.map" />
     <Content Include="Site.Mobile.Master" />
+    <Content Include="Pages\Services\StudentHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -320,15 +325,34 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Backend\Actors\Administrator.cs" />
-    <Compile Include="Backend\Actors\Person.cs" />
-    <Compile Include="Backend\Actors\Student.cs" />
-    <Compile Include="Backend\Actors\Teacher.cs" />
+    <Compile Include="Backend\Dao\CourseDao.cs" />
+    <Compile Include="Backend\Dao\DiscussDao.cs" />
+    <Compile Include="Backend\Dao\GroupDao.cs" />
     <Compile Include="Backend\Dao\PersonDao.cs" />
     <Compile Include="Backend\Database\DBUtils.cs" />
+    <Compile Include="Backend\Model\Po\CoursePo.cs" />
+    <Compile Include="Backend\Model\Vo\CourseSimpleVo.cs" />
+    <Compile Include="Backend\Model\Vo\DiscussSimpleVo.cs" />
+    <Compile Include="Backend\Model\Vo\DiscussSigninVo.cs" />
+    <Compile Include="Backend\Model\Vo\GroupVo.cs" />
+    <Compile Include="Backend\Utils\ResponseUtils.cs" />
     <Compile Include="Backend\Utils\Validators.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CourseHomePage.aspx.cs">
+      <DependentUpon>CourseHomePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\CourseHomePage.aspx.designer.cs">
+      <DependentUpon>CourseHomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DiscussionHomePage.aspx.cs">
+      <DependentUpon>DiscussionHomePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\DiscussionHomePage.aspx.designer.cs">
+      <DependentUpon>DiscussionHomePage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\LogInPage.aspx.cs">
       <DependentUpon>LogInPage.aspx</DependentUpon>
@@ -343,6 +367,12 @@
     </Compile>
     <Compile Include="Pages\PlatformSettingsPage.aspx.designer.cs">
       <DependentUpon>PlatformSettingsPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Services\CourseHandler.ashx.cs">
+      <DependentUpon>CourseHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Services\DiscussHandler.ashx.cs">
+      <DependentUpon>DiscussHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Pages\StudentHomePage.aspx.cs">
       <DependentUpon>StudentHomePage.aspx</DependentUpon>
@@ -359,6 +389,9 @@
       <DependentUpon>UserManagementPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Pages\Services\StudentHandler.ashx.cs">
+      <DependentUpon>StudentHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -390,7 +423,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Service\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

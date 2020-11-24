@@ -1,5 +1,4 @@
-﻿using FCBackend.Actors;
-using FCBackend.Dao;
+﻿using FCBackend.Dao;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,19 +31,7 @@ namespace FCWebApp.Pages
             string pass = this.InputNewPassword.Value;
             string email = this.InputNewEmail.Value;
 
-            if (Administrator.CreateTeacher(teacherId, pass, name, email))
-            {
-                Response.Write("<div class=\"alert alert-success alert-dismissable\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>" +
-                    "Insert succeessfully." +
-                    "</div>");
-            }
-            else
-            {
-                // wrong
-                Response.Write("<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>" +
-                    "Error occurred." +
-                    "</div>");
-            }
+            // TODO - insert teacher
         }
 
         protected void BtnSubmitThisEdit()

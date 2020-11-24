@@ -1,5 +1,7 @@
-﻿using FCBackend.Actors;
-using FCWebApp.Backend.Database;
+﻿using FCWebApp.Backend.Database;
+using FCWebApp.Backend.Model;
+using FCWebApp.Backend.Model.Vo;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -11,63 +13,81 @@ namespace FCBackend.Dao
 {
     class PersonDao
     {
-        static ulong id = 0;
-        // Temporarily using a list to store persons
-        static List<Person> persons = new List<Person>();
-
-        static public List<Person> PersonList
+        public static List<CourseSimpleVo> getCoursesByStuId(Int64 stuId)
         {
-            get { return persons; }
-        }
+            List<CourseSimpleVo> lcp = new List<CourseSimpleVo>();
+            // connect to mysql
+            MySqlConnection conn = DBUtils.GetConnection();
+            conn.Open();
+            string sql = String.Format("SELECT course_id, class_num, group_id, name, description, status FROM fc_select, fc_course WHERE fc_select.stu_id={0} AND fc_course.id=fc_select.course_id;"
+                , stuId);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            MySqlDataReader reader = comm.ExecuteReader();
 
-        static public bool InsertTeacher(
-            string teacherID, string password, string alias, string email)
-        {
-            // connect to sql server
-            MySql.Data.MySqlClient.MySqlConnection conn = DBUtils.GetConnection();
-            string sql = String.Format(
-                "INSERT INTO fc_user (type, username, password, alias, email, status) VALUES" +
-                "('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')"
-                , "TC", teacherID, password, alias, email, "NM"
-            );
-
-            // try perform insert
-            try
+            // perform reading
+            while (reader.Read())
             {
-                conn.Open();
-                MySql.Data.MySqlClient.MySqlCommand comm = new MySql.Data.MySqlClient.MySqlCommand(sql, conn);
-                if (comm.ExecuteNonQuery() > 0)
-                {
-                    return true;
-                }
-            }
-            catch (SqlException ex)
-            {
-                Console.WriteLine(ex.Message);
-                return false;
+                // 构造 Vo 对象
+                CourseSimpleVo vo = new CourseSimpleVo();
+                vo.id = reader.GetInt64(0);
+                vo.classNum = reader.GetInt64(1);
+                vo.groupId = reader.IsDBNull(2) ? -1 : reader.GetInt64(2);
+                vo.name = reader.GetString(3);
+                vo.description = reader.GetString(4);
+                vo.status = reader.GetString(5);
+                // 插入序列
+                lcp.Add(vo);
             }
 
-            return false;
+            // close connection
+            conn.Close();
+            return lcp;
         }
 
-        static public ulong InsertStudent(
-            string stuID, string password, string alias, string email)
+        public static GroupVo getCourseGroupByStuId(Int64 stuId, Int64 courseId)
         {
-            // TODO - insert; fetch auto-increment ids
-            persons.Add(new Student(++id, stuID, alias, password, email));
-            return id;
+            GroupVo vo = new GroupVo();
+            // connect to mysql
+            MySqlConnection conn = DBUtils.GetConnection();
+            conn.Open();
+            string sql = String.Format("SELECT id, name, course_id, class_num, status FROM fc_group, fc_group_attend WHERE stu_id={0} AND course_id={1};"
+                , stuId, courseId);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            MySqlDataReader reader = comm.ExecuteReader();
+
+            // perform reading
+            while (reader.Read())
+            {
+                // 构造 Vo 对象
+                vo.id = reader.GetInt64(0);
+                vo.name = reader.GetString(1);
+                vo.courseId = reader.GetInt64(2);
+                vo.classNum = reader.GetInt16(3);
+                vo.Status = reader.GetString(4);
+            }
+
+            // close connection
+            conn.Close();
+            return vo;
         }
 
-        static public string SelectUsername(ulong id)
+        public static String getStudentName(Int64 stuId)
         {
-            // TODO
-            return "";
-        }
+            // connect to mysql
+            MySqlConnection conn = DBUtils.GetConnection();
+            conn.Open();
+            string sql = String.Format("SELECT alias FROM fc_user WHERE id={0} AND type='ST';"
+                , stuId);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            MySqlDataReader reader = comm.ExecuteReader();
 
-        static public ulong SelectIdByUsername(string username)
-        {
-            // TODO
-            return id;
+            // perform reading
+            string name = "";
+            while (reader.Read())
+            {
+                name = reader.GetString(0);
+            }
+            return name;
         }
     }
 }

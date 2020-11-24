@@ -1,1 +1,31 @@
 https://blog.csdn.net/kisscatforever/article/details/54294091
+
+SELECT course_id, class_num, group_id, name, description, status FROM TABLE `fc_select`, `fc_course` WHERE `fc_select`.stu_id={0} AND `fc_course`.id=`fc_select`.course_id;
+
+insert into fc_course(id,name,description,weight_speak,weight_report,weight_ask,grouping_regulation_id,status) values(0,'OOAD','QMQMQMQMQM I am QM', 20, 30, 40, null, 'M');
+
+insert into fc_select(course_id, stu_id, class_num, group_id) values(1, 2, 1, null);
+
+
+-- Group Table
+DROP TABLE IF EXISTS `fc_group`;
+CREATE TABLE fc_group (
+    id bigint primary key auto_increment,
+    name varchar(255) not null,
+    course_id bigint not null,
+    class_num tinyint not null,
+    leader_id bigint not null,
+    -- Status: norMal, Dismissed
+    status enum('M', 'D') not null,
+    foreign key(course_id) references `fc_course`(id),
+    foreign key(leader_id) references `fc_user`(id)
+) engine=MyISAM;
+
+-- Group Attend Table
+DROP TABLE IF EXISTS `fc_group_attend`;
+CREATE TABLE fc_group_attend (
+    stu_id bigint not null,
+    group_id bigint not null,
+    foreign key(stu_id) references `fc_user`(id),
+    foreign key(group_id) references `fc_group`(id)
+) engine=MyISAM;
