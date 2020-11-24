@@ -7,9 +7,9 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace FCWebApp {
+namespace FCWebApp.Pages {
     
     
-    public partial class WelcomePage {
+    public partial class StudentHomePage {
     }
 }

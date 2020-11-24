@@ -161,6 +161,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="packages.config" />
     <Content Include="Pages\PlatformSettingsPage.aspx" />
+    <Content Include="Pages\StudentHomePage.aspx" />
     <Content Include="Pages\UserManagementPage.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -342,6 +343,13 @@
     </Compile>
     <Compile Include="Pages\PlatformSettingsPage.aspx.designer.cs">
       <DependentUpon>PlatformSettingsPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\StudentHomePage.aspx.cs">
+      <DependentUpon>StudentHomePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\StudentHomePage.aspx.designer.cs">
+      <DependentUpon>StudentHomePage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\UserManagementPage.aspx.cs">
       <DependentUpon>UserManagementPage.aspx</DependentUpon>

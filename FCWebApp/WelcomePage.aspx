@@ -9,7 +9,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <h2>User Management</h2>
             <p>
                 To update, add or delete the platform users.
@@ -18,7 +18,16 @@
                 <a runat="server" class="btn btn-default" href="~/Pages/UserManagementPage">Manage &raquo;</a>
             </p>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
+            <h2>Student Home</h2>
+            <p>
+                Functions for students.
+            </p>
+            <p>
+                <a runat="server" class="btn btn-default" href="~/Pages/StudentHomePage">Enter &raquo;</a>
+            </p>
+        </div>
+        <div class="col-md-4">
             <h2>Platform Settings</h2>
             <p>
                 To change settings or adjust system functions.
