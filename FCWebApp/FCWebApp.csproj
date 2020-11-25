@@ -156,9 +156,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\xmulogo.jpg" />
+    <Content Include="Content\LoginPage.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Data\PersonList.xml" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="LoginPage.aspx" />
     <Content Include="packages.config" />
     <Content Include="Pages\CourseHomePage.aspx" />
     <Content Include="Pages\DiscussionHomePage.aspx" />
@@ -190,6 +193,7 @@
     <Content Include="Scripts\jquery-3.5.1.slim.js" />
     <Content Include="Scripts\jquery-3.5.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\login-script.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
@@ -339,6 +343,13 @@
     <Compile Include="Backend\Utils\Validators.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="LoginPage.aspx.cs">
+      <DependentUpon>LoginPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginPage.aspx.designer.cs">
+      <DependentUpon>LoginPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\CourseHomePage.aspx.cs">
       <DependentUpon>CourseHomePage.aspx</DependentUpon>

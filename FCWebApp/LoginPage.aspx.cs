@@ -7,14 +7,17 @@ using System.Web.UI.WebControls;
 
 namespace FCWebApp
 {
-    public partial class WelcomePage : Page
+    public partial class Login : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["CurrentUserId"] == null)
-            {
-                Response.Redirect("LoginPage.aspx");
-            }
+
+        }
+
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+            String id = this.idInput.Text;
+            String pw = this.passwordInput.Text;
         }
     }
 }
