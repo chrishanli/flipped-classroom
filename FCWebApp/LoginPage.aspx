@@ -52,7 +52,9 @@
 										<label for="remember" class="custom-control-label">Remember Me</label>
 									</div>
 								</div>
-
+                                <div class="mt-4">
+                                    <asp:Label ID="lblWrongPw" runat="server" ForeColor="DarkRed"></asp:Label>
+								</div>
 								<div class="form-group m-0">
                                     <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-primary btn-block" OnClick="btnLogin_Click" Text="Login"/>
 								</div>
