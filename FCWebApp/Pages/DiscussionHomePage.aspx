@@ -4,7 +4,7 @@
     <%-- 引入 jQuery --%>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <div class="container">
-        <h2>Discuss Home - <%=this.discussId %></h2>
+        <h2>Discuss Home - <%= this.topic %></h2>
     </div>
 
     <%-- 我的报名 --%>
@@ -60,7 +60,7 @@
             $.ajax({
                 url: 'DiscussHandler/uploadFile',
                 type: 'POST',
-                headers: { "attendId": <%= this.discussAttendId %>},
+                headers: { "attendId": <%= this.attendInfo == null ? 0 : this.attendInfo.id %>},
                 data: data,
                 cache: false,
                 processData: false,

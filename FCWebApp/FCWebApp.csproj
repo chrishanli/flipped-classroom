@@ -334,10 +334,10 @@
     <Compile Include="Backend\Dao\PersonDao.cs" />
     <Compile Include="Backend\Database\DBUtils.cs" />
     <Compile Include="Backend\Model\Po\CoursePo.cs" />
+    <Compile Include="Backend\Model\Po\DiscussAttendPo.cs" />
     <Compile Include="Backend\Model\Po\PersonPo.cs" />
     <Compile Include="Backend\Model\Vo\CourseSimpleVo.cs" />
     <Compile Include="Backend\Model\Vo\DiscussSimpleVo.cs" />
-    <Compile Include="Backend\Model\Vo\DiscussSigninVo.cs" />
     <Compile Include="Backend\Model\Vo\GroupVo.cs" />
     <Compile Include="Backend\Utils\ResponseUtils.cs" />
     <Compile Include="Backend\Utils\Validators.cs" />

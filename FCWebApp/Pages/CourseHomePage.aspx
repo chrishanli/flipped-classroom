@@ -64,7 +64,7 @@
                         tableHtml += "<td>" + dlist[i].signinEndTime + "</td>"
                         tableHtml += "<td>" + status + "</td>"
                         tableHtml += "<td>"
-                        tableHtml += "<a href=DiscussionHomePage?sid=<%=4%>&did=" + dlist[i].id + ">Open</a>"
+                        tableHtml += "<a href=DiscussionHomePage?did=" + dlist[i].id + ">Open</a>"
                         if (dlist[i].signinStatus === "ing") {
                             tableHtml += "&nbsp;|&nbsp;<a href=DiscussionHomePage?sid=<%=4%>&did=" + dlist[i].id + ">Attend</a>"
                         }

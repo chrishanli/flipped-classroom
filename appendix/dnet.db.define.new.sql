@@ -1,4 +1,4 @@
-
+﻿
 -- 用户表 （学生、教师、管理员）
 DROP TABLE IF EXISTS `fc_user`;
 CREATE TABLE `fc_user` (

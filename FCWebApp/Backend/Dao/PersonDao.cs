@@ -69,31 +69,5 @@ namespace FCBackend.Dao
             }
             return po;
         }
-
-        public static DiscussSigninVo getSignedInRecord(Int64 stuId, Int64 discussId)
-        {
-            DiscussSigninVo vo = new DiscussSigninVo();
-            // connect to mysql
-            MySqlConnection conn = DBUtils.GetConnection();
-            conn.Open();
-            string sql = String.Format("SELECT id, discuss_id, stu_id, signin_time FROM fc_discuss_signin WHERE stu_id={0} AND discuss_id={1};"
-                , stuId, discussId);
-            MySqlCommand comm = new MySqlCommand(sql, conn);
-            MySqlDataReader reader = comm.ExecuteReader();
-
-            // perform reading
-            if (reader.Read())
-            {
-                // 构造 Vo 对象
-                vo.id = reader.GetInt64(0);
-                vo.discussId = reader.GetInt64(1);
-                vo.stuId = reader.GetInt64(2);
-                vo.signInTime = reader.GetMySqlDateTime(3).GetDateTime().ToString("dd/MM/yyyy HH:mm:ss");
-            }
-
-            // close connection
-            conn.Close();
-            return vo;
-        }
     }
 }
