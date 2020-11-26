@@ -1,5 +1,5 @@
 
--- User Table
+-- 用户表 （学生、教师）
 DROP TABLE IF EXISTS `fc_user`;
 CREATE TABLE `fc_user` (
     id bigint primary key auto_increment,
@@ -14,7 +14,7 @@ CREATE TABLE `fc_user` (
     UNIQUE INDEX `idx_username_unique` (`username` ASC)
 ) engine=MyISAM;
 
--- Admin Table
+-- 管理员表
 DROP TABLE IF EXISTS `fc_admin`;
 CREATE TABLE fc_admin (
     id bigint primary key auto_increment,
@@ -26,7 +26,7 @@ CREATE TABLE fc_admin (
     UNIQUE INDEX `idx_username_unique` (`username` ASC)
 ) engine=MyISAM;
 
--- Course Table
+-- 课程表
 DROP TABLE IF EXISTS `fc_course`;
 CREATE TABLE fc_course (
     id bigint primary key auto_increment,

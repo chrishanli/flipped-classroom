@@ -20,7 +20,7 @@ namespace FCBackend.Dao
             // connect to mysql
             MySqlConnection conn = DBUtils.GetConnection();
             conn.Open();
-            string sql = String.Format("SELECT course_id, class_num, group_id, name, description, status FROM fc_select, fc_course WHERE fc_select.stu_id={0} AND fc_course.id=fc_select.course_id;"
+            string sql = String.Format("SELECT course_id, class_num, name, description, status FROM fc_select, fc_course WHERE fc_select.stu_id={0} AND fc_course.id=fc_select.course_id;"
                 , stuId);
             MySqlCommand comm = new MySqlCommand(sql, conn);
             MySqlDataReader reader = comm.ExecuteReader();
@@ -32,10 +32,9 @@ namespace FCBackend.Dao
                 CourseSimpleVo vo = new CourseSimpleVo();
                 vo.id = reader.GetInt64(0);
                 vo.classNum = reader.GetInt64(1);
-                vo.groupId = reader.IsDBNull(2) ? -1 : reader.GetInt64(2);
-                vo.name = reader.GetString(3);
-                vo.description = reader.GetString(4);
-                vo.status = reader.GetString(5);
+                vo.name = reader.GetString(2);
+                vo.description = reader.GetString(3);
+                vo.status = reader.GetString(4);
                 // 插入序列
                 lcp.Add(vo);
             }
@@ -43,52 +42,6 @@ namespace FCBackend.Dao
             // close connection
             conn.Close();
             return lcp;
-        }
-
-        public static GroupVo getCourseGroupByStuId(Int64 stuId, Int64 courseId)
-        {
-            GroupVo vo = new GroupVo();
-            // connect to mysql
-            MySqlConnection conn = DBUtils.GetConnection();
-            conn.Open();
-            string sql = String.Format("SELECT id, name, course_id, class_num, status FROM fc_group, fc_group_attend WHERE stu_id={0} AND course_id={1};"
-                , stuId, courseId);
-            MySqlCommand comm = new MySqlCommand(sql, conn);
-            MySqlDataReader reader = comm.ExecuteReader();
-
-            // perform reading
-            while (reader.Read())
-            {
-                // 构造 Vo 对象
-                vo.id = reader.GetInt64(0);
-                vo.name = reader.GetString(1);
-                vo.courseId = reader.GetInt64(2);
-                vo.classNum = reader.GetInt16(3);
-                vo.Status = reader.GetString(4);
-            }
-
-            // close connection
-            conn.Close();
-            return vo;
-        }
-
-        public static String getStudentName(Int64 stuId)
-        {
-            // connect to mysql
-            MySqlConnection conn = DBUtils.GetConnection();
-            conn.Open();
-            string sql = String.Format("SELECT alias FROM fc_user WHERE id={0} AND type='ST';"
-                , stuId);
-            MySqlCommand comm = new MySqlCommand(sql, conn);
-            MySqlDataReader reader = comm.ExecuteReader();
-
-            // perform reading
-            string name = "";
-            while (reader.Read())
-            {
-                name = reader.GetString(0);
-            }
-            return name;
         }
 
         public static PersonPo getUser(string username, string password)
@@ -115,6 +68,32 @@ namespace FCBackend.Dao
                 po.status = reader.GetString(5);
             }
             return po;
+        }
+
+        public static DiscussSigninVo getSignedInRecord(Int64 stuId, Int64 discussId)
+        {
+            DiscussSigninVo vo = new DiscussSigninVo();
+            // connect to mysql
+            MySqlConnection conn = DBUtils.GetConnection();
+            conn.Open();
+            string sql = String.Format("SELECT id, discuss_id, stu_id, signin_time FROM fc_discuss_signin WHERE stu_id={0} AND discuss_id={1};"
+                , stuId, discussId);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            MySqlDataReader reader = comm.ExecuteReader();
+
+            // perform reading
+            if (reader.Read())
+            {
+                // 构造 Vo 对象
+                vo.id = reader.GetInt64(0);
+                vo.discussId = reader.GetInt64(1);
+                vo.stuId = reader.GetInt64(2);
+                vo.signInTime = reader.GetMySqlDateTime(3).GetDateTime().ToString("dd/MM/yyyy HH:mm:ss");
+            }
+
+            // close connection
+            conn.Close();
+            return vo;
         }
     }
 }

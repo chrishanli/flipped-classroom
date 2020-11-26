@@ -19,17 +19,18 @@ namespace FCWebApp.Service
             context.Response.Clear();
             context.Response.ContentType = "application/json;charset=utf-8";
             string methodName = context.Request.Params["method"];
+            long userId = long.Parse(context.Request.Headers["id"]);
             switch (methodName)
             {
                 case "fetchCourses":
-                    context.Response.Write(fetchCourses());
+                    context.Response.Write(fetchCourses(userId));
                     break;
             }
         }
 
-        private string fetchCourses()
+        private string fetchCourses(long id)
         {
-            List<CourseSimpleVo> voList = PersonDao.getCoursesByStuId(2);
+            List<CourseSimpleVo> voList = PersonDao.getCoursesByStuId(id);
             return voList == null ? 
                 ResponseUtils.makeErrorResponse(400) : 
                 ResponseUtils.makeNormalResponse(200, voList);

@@ -26,7 +26,7 @@ namespace FCWebApp
         {
             if (Session["CurrentUserId"] == null)
             {
-                Response.Redirect("LoginPage.aspx");
+                Response.Redirect("~/LoginPage.aspx");
             }
         }
 

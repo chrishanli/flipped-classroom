@@ -17,6 +17,8 @@
                     <th>Serial Number</th>
                     <th>Topic</th>
                     <th>Contents</th>
+                    <th>Sign In Start Time</th>
+                    <th>Sign In End Time</th>
                     <th>Sign In Status</th>
                     <th>Operation</th>
                 </tr>
@@ -41,25 +43,32 @@
                     dlist = res.data
                     tableHtml = ""
                     for (i = 0; i < dlist.length; i++) {
-                        signinStartTime = dlist[i].signinStartTime
-                        signinEndTime = dlist[i].signinEndTime
-
-                        nowTime = Math.round(new Date() / 1000)
                         status = ""
-                        if (nowTime < signinStartTime) {
-                            status = "Not Started"
-                        } else if (nowTime < signinEndTime) {
-                            status = "Sign-in In Progress"
-                        } else {
-                            status = "Sign-in Expired"
+                        switch (dlist[i].signinStatus) {
+                            case "not":
+                                status = "Not Started";
+                                break;
+                            case "ing":
+                                status = "In Progress";
+                                break;
+                            case "exp":
+                                status = "Expired";
+                                break;
                         }
 
                         tableHtml += "<tr>"
                         tableHtml += "<td>" + dlist[i].sn + "</td>"
                         tableHtml += "<td>" + dlist[i].topic + "</td>"
                         tableHtml += "<td>" + dlist[i].contents + "</td>"
+                        tableHtml += "<td>" + dlist[i].signinStartTime + "</td>"
+                        tableHtml += "<td>" + dlist[i].signinEndTime + "</td>"
                         tableHtml += "<td>" + status + "</td>"
-                        tableHtml += "<td><a href=DiscussionHomePage?sid=<%=4%>&did=" + dlist[i].id + ">Open</a></td>"
+                        tableHtml += "<td>"
+                        tableHtml += "<a href=DiscussionHomePage?sid=<%=4%>&did=" + dlist[i].id + ">Open</a>"
+                        if (dlist[i].signinStatus === "ing") {
+                            tableHtml += "&nbsp;|&nbsp;<a href=DiscussionHomePage?sid=<%=4%>&did=" + dlist[i].id + ">Attend</a>"
+                        }
+                        tableHtml += "</td>"
                         tableHtml += "</tr>"
                     }
                     $("#table-discuss").html(tableHtml)

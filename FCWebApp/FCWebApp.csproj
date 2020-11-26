@@ -331,7 +331,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Backend\Dao\CourseDao.cs" />
     <Compile Include="Backend\Dao\DiscussDao.cs" />
-    <Compile Include="Backend\Dao\GroupDao.cs" />
     <Compile Include="Backend\Dao\PersonDao.cs" />
     <Compile Include="Backend\Database\DBUtils.cs" />
     <Compile Include="Backend\Model\Po\CoursePo.cs" />

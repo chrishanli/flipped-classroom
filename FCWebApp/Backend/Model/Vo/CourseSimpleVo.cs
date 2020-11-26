@@ -12,6 +12,5 @@ namespace FCWebApp.Backend.Model.Vo
         public String description { get; set; }
         public String status { get; set; }
         public Int64 classNum { get; set; }
-        public Int64 groupId { get; set; }
     }
 }

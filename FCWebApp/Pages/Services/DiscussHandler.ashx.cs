@@ -36,11 +36,7 @@ namespace FCWebApp.Pages.Services
 
         private string fetchDiscussAttend(Int64 attendId)
         {
-            // 获取报名
-            DiscussSigninVo dsvo = GroupDao.getSignedInRecord(attendId);
-            return dsvo == null ?
-                ResponseUtils.makeErrorResponse(400) :
-                ResponseUtils.makeNormalResponse(200, dsvo);
+            return "";
         }
 
         private bool uploadFile(Int64 disAttendId)

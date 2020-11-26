@@ -28,7 +28,13 @@ namespace FCWebApp
             }
             else
             {
+                // 登入成功，将用户资讯载入 Session
                 Session["CurrentUserId"] = po.id;
+                Session["CurrentUserType"] = po.type;
+                Session["CurrentUsername"] = po.username;
+                Session["CurrentUserAlias"] = po.alias;
+                Session["CurrentUserEmail"] = po.email;
+                Session["CurrentUserStatus"] = po.status;
                 Response.Redirect("WelcomePage.aspx");
             }
         }

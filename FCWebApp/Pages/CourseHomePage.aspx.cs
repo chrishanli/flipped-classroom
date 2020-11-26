@@ -15,7 +15,16 @@ namespace FCWebApp.Pages
         public String name;
         protected void Page_Load(object sender, EventArgs e)
         {
-            courseId = Int64.Parse(Request["cid"]);
+            string id = Request["cid"];
+            if (id == null)
+            {
+                Response.Write("<script language='javascript'>");
+                Response.Write("alert('The course id was not specified.');");
+                Response.Write("</script>");
+                Response.Redirect("StudentHomePage.aspx");
+                return;
+            }
+            courseId = Int64.Parse(id);
             // 获取课程的姓名
             name = CourseDao.getCourseName(courseId);
         }

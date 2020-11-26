@@ -4,7 +4,7 @@
     <%-- 引入 jQuery --%>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <div class="container">
-        <h2>Welcome, <%= this.name %></h2>
+        <h2>Welcome, <%= Session["CurrentUserAlias"] %></h2>
     </div>
 
     <hr />
@@ -33,6 +33,9 @@
                 type: "get",
                 contentType: "application/json",
                 url: "Services/StudentHandler.ashx?method=" + "fetchCourses",
+                headers: {
+                    "id": <%= Session["CurrentUserId"] %>
+                },
                 success: function (res) {
                     if (res.errCode != 200) {
                         alert(res.data)
