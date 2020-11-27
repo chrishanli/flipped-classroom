@@ -66,7 +66,7 @@
                         tableHtml += "<td>"
                         tableHtml += "<a href=DiscussionHomePage?did=" + dlist[i].id + ">Open</a>"
                         if (dlist[i].signinStatus === "ing") {
-                            tableHtml += "&nbsp;|&nbsp;<a href=DiscussionHomePage?sid=<%=4%>&did=" + dlist[i].id + ">Attend</a>"
+                            tableHtml += "&nbsp;|&nbsp;<a onclick=\"joinDiscuss(" + dlist[i].id + ")\">Attend</a>"
                         }
                         tableHtml += "</td>"
                         tableHtml += "</tr>"
@@ -74,6 +74,12 @@
                     $("#table-discuss").html(tableHtml)
                 }
             })
+        }
+    </script>
+    <%-- 报名讨论课 --%>
+    <script>
+        function joinDiscuss(did) {
+            // 发送报名讨论课请求
         }
     </script>
 

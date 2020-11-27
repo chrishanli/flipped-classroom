@@ -56,12 +56,12 @@ CREATE TABLE fc_discuss (
 -- 讨论课报名表
 DROP TABLE IF EXISTS `fc_discuss_attend`;
 CREATE TABLE fc_discuss_attend (
-    id bigint primary key auto_increment,
     discuss_id bigint not null,
     stu_id bigint not null,
-    signin_time datetime not null,
+    signin_time datetime not null DEFAULT CURRENT_TIMESTAMP,
     foreign key(discuss_id) references `fc_discuss`(id),
-    foreign key(stu_id) references `fc_user`(id)
+    foreign key(stu_id) references `fc_user`(id),
+    primary key(discuss_id, stu_id)
 ) engine=MyISAM;
 
 -- 讨论课展示材料表
@@ -72,6 +72,17 @@ CREATE TABLE fc_discuss_material (
     upload_time datetime not null,
     file_name varchar(255),
     file_url varchar(255),
+    foreign key(attend_id) references `fc_discuss_attend`(id)
+) engine=MyISAM;
+
+-- 讨论课展示提问表
+DROP TABLE IF EXISTS `fc_discuss_question`;
+CREATE TABLE fc_discuss_question (
+    id bigint primary key auto_increment,
+    attend_id bigint not null,
+    question_time datetime not null,
+    topic varchar(255),
+    contents varchar(1023),
     foreign key(attend_id) references `fc_discuss_attend`(id)
 ) engine=MyISAM;
 

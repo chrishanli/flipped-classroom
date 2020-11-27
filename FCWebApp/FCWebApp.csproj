@@ -167,6 +167,7 @@
     <Content Include="Pages\DiscussionHomePage.aspx" />
     <Content Include="Pages\PlatformSettingsPage.aspx" />
     <Content Include="Pages\StudentHomePage.aspx" />
+    <Content Include="Pages\StudentPersonalCentrePage.aspx" />
     <Content Include="Pages\UserManagementPage.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -323,7 +324,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Pages\LogInPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -365,13 +365,6 @@
     <Compile Include="Pages\DiscussionHomePage.aspx.designer.cs">
       <DependentUpon>DiscussionHomePage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\LogInPage.aspx.cs">
-      <DependentUpon>LogInPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\LogInPage.aspx.designer.cs">
-      <DependentUpon>LogInPage.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\PlatformSettingsPage.aspx.cs">
       <DependentUpon>PlatformSettingsPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -391,6 +384,13 @@
     </Compile>
     <Compile Include="Pages\StudentHomePage.aspx.designer.cs">
       <DependentUpon>StudentHomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\StudentPersonalCentrePage.aspx.cs">
+      <DependentUpon>StudentPersonalCentrePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\StudentPersonalCentrePage.aspx.designer.cs">
+      <DependentUpon>StudentPersonalCentrePage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\UserManagementPage.aspx.cs">
       <DependentUpon>UserManagementPage.aspx</DependentUpon>

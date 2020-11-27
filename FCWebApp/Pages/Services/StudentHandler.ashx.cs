@@ -25,7 +25,21 @@ namespace FCWebApp.Service
                 case "fetchCourses":
                     context.Response.Write(fetchCourses(userId));
                     break;
+                case "changeInfo":
+                    // 获取名字、邮箱
+                    string userAlias = context.Request.Headers["newAlias"].ToString();
+                    string userEmail = context.Request.Headers["newEmail"].ToString();
+                    context.Response.Write(changeInfo(userId, userAlias, userEmail));
+                    break;
             }
+        }
+
+        private string changeInfo(long id, string alias, string email)
+        {
+            bool changeOk = PersonDao.changeUserInfo(id, alias, email);
+            return changeOk == false ?
+                ResponseUtils.makeErrorResponse(400) :
+                ResponseUtils.makeOkResponse();
         }
 
         private string fetchCourses(long id)

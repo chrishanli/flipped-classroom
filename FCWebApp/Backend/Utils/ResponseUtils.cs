@@ -8,6 +8,14 @@ namespace FCWebApp.Backend.Utils
 {
     public class ResponseUtils
     {
+        public static string makeOkResponse()
+        {
+            Dictionary<String, Object> ret = new Dictionary<string, object>();
+            ret.Add("errCode", 200);
+            ret.Add("message", "ok");
+
+            return JsonConvert.SerializeObject(ret);
+        }
         public static string makeNormalResponse(int responseCode, object responseObject)
         {
             Dictionary<String, Object> ret = new Dictionary<string, object>();

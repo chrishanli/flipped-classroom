@@ -69,5 +69,36 @@ namespace FCBackend.Dao
             }
             return po;
         }
+
+        public static bool changeUserInfo(long id, string alias, string email)
+        {
+            // connect to mysql
+            MySqlConnection conn = DBUtils.GetConnection();
+            conn.Open();
+            string sql, claims = "";
+            if (alias != "")
+            {
+                claims += "alias='" + alias + "'";
+            }
+            if (email != "")
+            {
+                if (claims.Length <= 0)
+                {
+                    claims += "email='" + email + "'";
+                }
+                else
+                {
+                    claims += ", email='" + email + "'";
+                }
+            }
+
+            sql = String.Format("UPDATE fc_user SET {0} WHERE id={1};"
+                , claims, id);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            int rowsAffected = comm.ExecuteNonQuery();
+
+            // perform update
+            return rowsAffected > 0;
+        }
     }
 }

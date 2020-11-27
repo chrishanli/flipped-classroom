@@ -7,27 +7,27 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace FCWebApp {
+namespace FCWebApp.Pages {
     
     
-    public partial class SiteMaster {
+    public partial class StudentPersonalCentrePage {
         
         /// <summary>
-        /// logoutButton 控件。
+        /// txtAlias 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton logoutButton;
+        protected global::System.Web.UI.WebControls.TextBox txtAlias;
         
         /// <summary>
-        /// MainContent 控件。
+        /// txtEmail 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
     }
 }

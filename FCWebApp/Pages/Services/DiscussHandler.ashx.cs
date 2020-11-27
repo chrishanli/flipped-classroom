@@ -20,23 +20,46 @@ namespace FCWebApp.Pages.Services
             context.Response.Clear();
             context.Response.ContentType = "application/json;charset=utf-8";
             string methodName = context.Request.Params["method"];
-            string aid;
+            string sid, aid, did;
             switch (methodName)
             {
-                case "fetchAttendedDiscuss":
-                    aid = context.Request.Params["aid"];
-                    context.Response.Write(fetchDiscussAttend(Int64.Parse(aid)));
+                case "checkAttended":
+                    sid = context.Request.Headers["id"];
+                    did = context.Request.Params["did"];
+                    context.Response.Write(isJoinedDiscuss(Int64.Parse(sid), Int64.Parse(did)));
+                    break;
+                case "attendDiscuss":
+                    sid = context.Request.Headers["id"];
+                    did = context.Request.Params["did"];
+                    context.Response.Write(joinDiscuss(Int64.Parse(did), Int64.Parse(sid)));
                     break;
                 case "uploadFile":
-                    aid = context.Request.Headers["aid"];
-                    context.Response.Write(fetchDiscussAttend(Int64.Parse(aid)));
+                    
                     break;
             }
         }
 
-        private string fetchDiscussAttend(Int64 attendId)
+        private string isJoinedDiscuss(long sid, long did)
+        {
+            bool isJoined = DiscussDao.isAttended(did, sid);
+            if (isJoined)
+            {
+                return "true";
+            }
+            return "false";
+        }
+
+        private string joinDiscuss(long stuId, long discussId)
         {
             return "";
+        }
+
+        private string fetchAttendedDiscuss(long sid, long did)
+        {
+            List<DiscussSimpleVo> voList = DiscussDao.ge(id);
+            return voList == null ?
+                ResponseUtils.makeErrorResponse(400) :
+                ResponseUtils.makeNormalResponse(200, voList);
         }
 
         private bool uploadFile(Int64 disAttendId)

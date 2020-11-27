@@ -44,6 +44,16 @@
                 <a runat="server" class="btn btn-default" href="~/Pages/StudentHomePage">Enter &raquo;</a>
             </p>
         </div>
+        <%-- 学生功能：我的个人中心 --%>
+        <div class="col-md-6">
+            <h2>Personal Centre</h2>
+            <p>
+                To update personal information.
+            </p>
+            <p>
+                <a runat="server" class="btn btn-default" href="~/Pages/StudentPersonalCentrePage">Go &raquo;</a>
+            </p>
+        </div>
         <% } %>
     </div>
 

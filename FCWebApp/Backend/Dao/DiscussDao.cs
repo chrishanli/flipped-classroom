@@ -29,6 +29,43 @@ namespace FCWebApp.Backend.Dao
             return topic;
         }
 
+        public static bool isAttended(Int64 did, Int64 sid)
+        {
+            // connect to mysql
+            MySqlConnection conn = DBUtils.GetConnection();
+            conn.Open();
+            string sql = String.Format("SELECT count(*) FROM fc_discuss_attend WHERE id={0} AND stu_id={0};"
+                , did, sid);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            MySqlDataReader reader = comm.ExecuteReader();
+
+            // perform reading
+            int count = 0;
+            if (reader.Read())
+            {
+                count = reader.GetInt32(0);
+            }
+            return count == 1;
+        }
+
+        public static bool attend(Int64 did, Int64 sid)
+        {
+            // connect to mysql
+            MySqlConnection conn = DBUtils.GetConnection();
+            conn.Open();
+            string sql = String.Format("INSERT INTO fc_discuss_attend(discuss_id, stu_id) VALUES({0}, {1});"
+                , did, sid);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            int affected = comm.ExecuteNonQuery();
+
+            // perform reading
+            if (affected <= 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public static DiscussAttendPo getDiscussAttendInfo(Int64 discussId, Int64 stuId)
         {
             // connect to mysql
