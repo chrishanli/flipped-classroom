@@ -1,5 +1,6 @@
 ﻿using FCWebApp.Backend.Database;
 using FCWebApp.Backend.Model.Po;
+using FCWebApp.Backend.Model.Vo;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -46,6 +47,54 @@ namespace FCWebApp.Backend.Dao
                 count = reader.GetInt32(0);
             }
             return count == 1;
+        }
+
+        public static bool addFile(long aid, string filename, string origFilename)
+        {
+            // connect to mysql
+            MySqlConnection conn = DBUtils.GetConnection();
+            conn.Open();
+            string sql = String.Format("INSERT INTO fc_discuss_material(attend_id, file_name, file_url) VALUES({0}, '{1}', '{2}');"
+                , aid, origFilename, filename);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            int affected = comm.ExecuteNonQuery();
+
+            // perform adding
+            if (affected <= 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static List<FileVo> getUploadedFiles(long aid, long sid)
+        {
+            List<FileVo> list = new List<FileVo>();
+            // connect to mysql
+            MySqlConnection conn = DBUtils.GetConnection();
+            conn.Open();
+            string sql = String.Format("SELECT m.id, m.attend_id, upload_time, file_name, file_url FROM `fc_discuss_material` m, `fc_discuss_attend` a WHERE m.attend_id=a.id AND a.id={0} AND a.stu_id={1};"
+                , aid, sid);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            MySqlDataReader reader = comm.ExecuteReader();
+
+            // perform reading
+            if (reader.Read())
+            {
+                // 构造 Vo 对象
+                FileVo vo = new FileVo();
+                vo.id = reader.GetInt64(0);
+                vo.attendId = reader.GetInt64(1);
+                vo.uploadTime = reader.GetDateTime(2).ToString("dd/MM/yyyy HH:mm:ss");
+                vo.fileName = reader.GetString(3);
+                vo.fileUrl = reader.GetString(4);
+                // 插入序列
+                list.Add(vo);
+            }
+
+            // close connection
+            conn.Close();
+            return list;
         }
 
         public static bool attend(Int64 did, Int64 sid)

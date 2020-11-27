@@ -338,6 +338,7 @@
     <Compile Include="Backend\Model\Po\PersonPo.cs" />
     <Compile Include="Backend\Model\Vo\CourseSimpleVo.cs" />
     <Compile Include="Backend\Model\Vo\DiscussSimpleVo.cs" />
+    <Compile Include="Backend\Model\Vo\FileVo.cs" />
     <Compile Include="Backend\Model\Vo\GroupVo.cs" />
     <Compile Include="Backend\Utils\ResponseUtils.cs" />
     <Compile Include="Backend\Utils\Validators.cs" />
@@ -434,6 +435,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadFiles\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

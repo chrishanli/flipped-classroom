@@ -25,18 +25,16 @@ namespace FCWebApp
             if (po == null)
             {
                 this.lblWrongPw.Text = "Wrong Password or Username.";
+                return;
             }
-            else
-            {
-                // 登入成功，将用户资讯载入 Session
-                Session["CurrentUserId"] = po.id;
-                Session["CurrentUserType"] = po.type;
-                Session["CurrentUsername"] = po.username;
-                Session["CurrentUserAlias"] = po.alias;
-                Session["CurrentUserEmail"] = po.email;
-                Session["CurrentUserStatus"] = po.status;
-                Response.Redirect("WelcomePage.aspx");
-            }
+            // 登入成功，将用户资讯载入 Session
+            Session["CurrentUserId"] = po.id;
+            Session["CurrentUserType"] = po.type;
+            Session["CurrentUsername"] = po.username;
+            Session["CurrentUserAlias"] = po.alias;
+            Session["CurrentUserEmail"] = po.email;
+            Session["CurrentUserStatus"] = po.status;
+            Response.Redirect("WelcomePage.aspx");
         }
     }
 }

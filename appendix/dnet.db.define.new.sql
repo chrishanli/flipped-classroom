@@ -56,20 +56,21 @@ CREATE TABLE fc_discuss (
 -- 讨论课报名表
 DROP TABLE IF EXISTS `fc_discuss_attend`;
 CREATE TABLE fc_discuss_attend (
+    id bigint primary key auto_increment,
     discuss_id bigint not null,
     stu_id bigint not null,
     signin_time datetime not null DEFAULT CURRENT_TIMESTAMP,
     foreign key(discuss_id) references `fc_discuss`(id),
-    foreign key(stu_id) references `fc_user`(id),
-    primary key(discuss_id, stu_id)
+    foreign key(stu_id) references `fc_user`(id)
 ) engine=MyISAM;
+ALTER TABLE `fc_discuss_attend` ADD UNIQUE INDEX(discuss_id, stu_id);
 
 -- 讨论课展示材料表
 DROP TABLE IF EXISTS `fc_discuss_material`;
 CREATE TABLE fc_discuss_material (
     id bigint primary key auto_increment,
     attend_id bigint not null,
-    upload_time datetime not null,
+    upload_time datetime not null DEFAULT CURRENT_TIMESTAMP,
     file_name varchar(255),
     file_url varchar(255),
     foreign key(attend_id) references `fc_discuss_attend`(id)
@@ -89,6 +90,9 @@ CREATE TABLE fc_discuss_question (
 -- Test Data
 INSERT INTO fc_user (type, username, password, alias, email, status)
 VALUES ('AD', 'a', 'a', 'LH爷爷', 'han@han-li.cn', 'M');
+
+INSERT INTO fc_user (type, username, password, alias, email, status)
+VALUES ('ST', '243', '123456', '邱明', 'han@han-li.cn', 'N');
 
 INSERT INTO fc_user (type, username, password, alias, email, status)
 VALUES ('ST', '197', 'han', 'Han Li', 'han@han-li.cn', 'M');

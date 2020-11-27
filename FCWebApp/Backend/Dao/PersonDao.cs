@@ -75,7 +75,7 @@ namespace FCBackend.Dao
             // connect to mysql
             MySqlConnection conn = DBUtils.GetConnection();
             conn.Open();
-            string sql, claims = "";
+            string sql, claims = "status=M";
             if (alias != "")
             {
                 claims += "alias='" + alias + "'";
@@ -91,7 +91,6 @@ namespace FCBackend.Dao
                     claims += ", email='" + email + "'";
                 }
             }
-
             sql = String.Format("UPDATE fc_user SET {0} WHERE id={1};"
                 , claims, id);
             MySqlCommand comm = new MySqlCommand(sql, conn);
