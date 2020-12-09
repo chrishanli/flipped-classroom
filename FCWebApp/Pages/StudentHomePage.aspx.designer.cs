@@ -11,5 +11,23 @@ namespace FCWebApp.Pages {
     
     
     public partial class StudentHomePage {
+        
+        /// <summary>
+        /// tableCourses 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView tableCourses;
+        
+        /// <summary>
+        /// SqlDataSourceMySQL 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceMySQL;
     }
 }

@@ -11,21 +11,26 @@
     <hr />
     <h3>All Discuss Classes</h3>
     <div class="row" style="margin: 20px 0 0 0">
-        <table class="table table-striped table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>Serial Number</th>
-                    <th>Topic</th>
-                    <th>Contents</th>
-                    <th>Sign In Start Time</th>
-                    <th>Sign In End Time</th>
-                    <th>Sign In Status</th>
-                    <th>Operation</th>
-                </tr>
-            </thead>
-            <tbody id="table-discuss">
-            </tbody>
-        </table>
+        <asp:GridView ID="tableDiscuss" runat="server" CssClass="table table-striped table-bordered table-hover" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="MySQLDataSource">
+            <Columns>
+                <asp:BoundField DataField="id" HeaderText="Discuss ID" SortExpression="id" />
+                <asp:BoundField DataField="serial_num" HeaderText="Serial Number" SortExpression="serial_num" />
+                <asp:BoundField DataField="topic" HeaderText="Topic" SortExpression="topic" />
+                <asp:BoundField DataField="attend_start" HeaderText="Attend Start Time" SortExpression="attend_start" />
+                <asp:BoundField DataField="attend_end" HeaderText="Attend End Time" SortExpression="attend_end" />
+                <asp:BoundField DataField="contents" HeaderText="Contents" SortExpression="contents" />
+                <asp:TemplateField HeaderText="Options">
+                    <ItemTemplate>
+                        <asp:HyperLink ID="LinkOpen" runat="server" Text='<%#"Open" %>' NavigateUrl='<%# "DiscussionHomePage?did=" + Eval("id") %>'></asp:HyperLink>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+        <asp:SqlDataSource ID="MySQLDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:hanPublicMySQLConnectionString %>" ProviderName="<%$ ConnectionStrings:hanPublicMySQLConnectionString.ProviderName %>" SelectCommand="SELECT dis.id, topic, serial_num, attend_start, attend_end, contents FROM fc_discuss dis, fc_course WHERE fc_course.id=@courseId AND fc_course.id=dis.course_id">
+            <SelectParameters>
+                <asp:QueryStringParameter Name="courseId" QueryStringField="cid" />
+            </SelectParameters>
+        </asp:SqlDataSource>
     </div>
 
     <script>

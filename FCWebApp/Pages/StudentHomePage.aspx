@@ -11,7 +11,26 @@
     <h3>Courses</h3>
     <%-- 我的课程列表 --%>
     <div class="row" style="margin: 20px 0 0 0">
-        <table class="table table-striped table-bordered table-hover">
+        <asp:GridView ID="tableCourses" runat="server" CssClass="table table-striped table-bordered table-hover" DataSourceID="SqlDataSourceMySQL" AutoGenerateColumns="False">
+            <Columns>
+                <asp:BoundField DataField="course_id" HeaderText="Course ID" SortExpression="course_id" />
+                <asp:BoundField DataField="name" HeaderText="Course Name" SortExpression="name" />
+                <asp:BoundField DataField="class_num" HeaderText="Class Number" SortExpression="class_num" />
+                <asp:BoundField DataField="description" HeaderText="Course Description" SortExpression="description" />
+                <asp:BoundField DataField="status" HeaderText="Status" SortExpression="status" />
+                <asp:TemplateField HeaderText="Options">
+                    <ItemTemplate>
+                        <asp:HyperLink ID="Link" runat="server" Text='<%#"Enter Home" %>' NavigateUrl='<%# "CourseHomePage?cid=" + Eval("course_id") %>'></asp:HyperLink>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+        <asp:SqlDataSource ID="SqlDataSourceMySQL" runat="server" ConnectionString="<%$ ConnectionStrings:hanPublicMySQLConnectionString %>" ProviderName="<%$ ConnectionStrings:hanPublicMySQLConnectionString.ProviderName %>" SelectCommand="SELECT fc_select.course_id, fc_select.class_num, fc_course.name, fc_course.description, fc_course.status FROM fc_select INNER JOIN fc_course ON fc_select.course_id = fc_course.id WHERE (fc_select.stu_id = 1)">
+            <SelectParameters>
+                <asp:SessionParameter Name="stuId" SessionField="CurrentUserId" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+        <%--<table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
                     <th>Course ID</th>
@@ -24,9 +43,9 @@
             </thead>
             <tbody id="table-courses">
             </tbody>
-        </table>
+        </table>--%>
     </div>
-    <script>
+    <%--我觉得还是先不用 ajax 了，何必呢 ado.NET 不香嘛<script>
         window.onload = function () {
             // 文档加载完毕后，去获取数据
             $.ajax({
@@ -57,6 +76,6 @@
                 }
             })
         }
-    </script>
+    </script>--%>
 
 </asp:Content>
