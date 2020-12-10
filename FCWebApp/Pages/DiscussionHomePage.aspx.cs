@@ -18,11 +18,17 @@ namespace FCWebApp.Pages
         public DiscussAttendPo attendInfo;
         public String topic;
         public bool isReportAssigned = false;
+        public long stuId;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["CurrentUserId"] == null)
+            {
+                Response.Redirect("~/LoginPage.aspx");
+            }
+            // 记录讨论课 id
             string id = Request["did"];
-            long stuId = (long) Session["CurrentUserId"];
+            stuId = (long) Session["CurrentUserId"];
             if (id == null)
             {
                 Response.Write("<script language='javascript'>");
@@ -41,6 +47,7 @@ namespace FCWebApp.Pages
                 long attendId = attendInfo.id;
                 // 获取讨论课报名 id
                 this.SqlDataSourceMySQL.SelectParameters["attendId"].DefaultValue = attendId.ToString();
+                this.SqlDataSourceReportFile.SelectParameters["attendId"].DefaultValue = attendId.ToString();
                 // 获取是否提交了讨论课报告
                 this.isReportAssigned = DiscussDao.isReportAssigned(attendId);
             }
@@ -65,6 +72,19 @@ namespace FCWebApp.Pages
             {
                 // 取消报名成功
                 Response.Write(String.Format("<script>alert('取消报名成功。');location.href='/Pages/DiscussionHomePage.aspx?did={0}';</script>", this.discussId));
+            }
+        }
+
+        protected void btnSubmitQuestion_Click(object sender, EventArgs e)
+        {
+            string topic = this.questionTopic.Value;
+            string contents = this.questionContents.Value;
+            // 提交提问
+            bool isJoined = DiscussDao.addQuestion(this.attendInfo.id, stuId, topic, contents);
+            if (isJoined)
+            {
+                // 提交提问成功
+                Response.Write(String.Format("<script>alert('提交提问成功。');location.href='/Pages/DiscussionHomePage.aspx?did={0}';</script>", this.discussId));
             }
         }
 

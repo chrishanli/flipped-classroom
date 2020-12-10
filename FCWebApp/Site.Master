@@ -16,7 +16,7 @@
 
 </head>
 <body>
-    <form runat="server">
+    <form id="bigForm" ClientIDMode="static" runat="server">
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">

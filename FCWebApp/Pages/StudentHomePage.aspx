@@ -24,6 +24,9 @@
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
+            <EmptyDataTemplate>
+                <h4>Your course list is empty. Please select a course first!</h4>
+            </EmptyDataTemplate>
         </asp:GridView>
         <asp:SqlDataSource ID="SqlDataSourceMySQL" runat="server" ConnectionString="<%$ ConnectionStrings:hanPublicMySQLConnectionString %>" ProviderName="<%$ ConnectionStrings:hanPublicMySQLConnectionString.ProviderName %>" SelectCommand="SELECT fc_select.course_id, fc_select.class_num, fc_course.name, fc_course.description, fc_course.status FROM fc_select INNER JOIN fc_course ON fc_select.course_id = fc_course.id WHERE (fc_select.stu_id = 1)">
             <SelectParameters>

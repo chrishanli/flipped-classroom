@@ -340,6 +340,7 @@
     <Compile Include="Backend\Model\Vo\DiscussSimpleVo.cs" />
     <Compile Include="Backend\Model\Vo\FileVo.cs" />
     <Compile Include="Backend\Model\Vo\GroupVo.cs" />
+    <Compile Include="Backend\Model\Vo\QuestionVo.cs" />
     <Compile Include="Backend\Utils\ResponseUtils.cs" />
     <Compile Include="Backend\Utils\Validators.cs" />
     <Compile Include="Global.asax.cs">

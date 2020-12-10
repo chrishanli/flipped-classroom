@@ -171,6 +171,51 @@ namespace FCWebApp.Backend.Dao
             return true;
         }
 
+        public static bool addQuestion(long aid, long sid, string topic, string contents)
+        {
+            // connect to mysql
+            MySqlConnection conn = DBUtils.GetConnection();
+            conn.Open();
+            string sql = String.Format("INSERT INTO fc_discuss_question(attend_id, question_time, topic, contents, stu_id) values({0},'{1}','{2}', '{3}', {4})"
+                , aid, DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"), topic, contents, sid);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            int affected = comm.ExecuteNonQuery();
+
+            // perform reading
+            if (affected <= 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static QuestionVo getQuestion(long qid)
+        {
+            // connect to mysql
+            MySqlConnection conn = DBUtils.GetConnection();
+            conn.Open();
+            string sql = String.Format("SELECT question_time, topic, contents, stu_id FROM `fc_discuss_question` WHERE id={0};"
+                , qid);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            MySqlDataReader reader = comm.ExecuteReader();
+
+            // perform reading
+            if (reader.Read())
+            {
+                // 构造 Vo 对象
+                QuestionVo vo = new QuestionVo();
+                vo.id = qid;
+                vo.questionDate = reader.GetDateTime(0).ToString("dd/MM/yyyy HH:mm:ss");
+                vo.topic = reader.GetString(1);
+                vo.contents = reader.GetString(2);
+
+                // close connection
+                conn.Close();
+                return vo;
+            }
+            return null;
+        }
+
         public static DiscussAttendPo getDiscussAttendInfo(Int64 discussId, Int64 stuId)
         {
             // connect to mysql

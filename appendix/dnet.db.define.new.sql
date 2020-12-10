@@ -1,4 +1,4 @@
-﻿
+
 -- 用户表 （学生、教师、管理员）
 DROP TABLE IF EXISTS `fc_user`;
 CREATE TABLE `fc_user` (
@@ -85,6 +85,7 @@ CREATE TABLE fc_discuss_question (
     question_time datetime not null,
     topic varchar(255),
     contents varchar(1023),
+    stu_id bigint not null,
     foreign key(attend_id) references `fc_discuss_attend`(id)
 ) engine=MyISAM;
 
@@ -117,6 +118,8 @@ insert into fc_course (name, description, weight_speak, weight_report, weight_as
 values('JAVAEE', 'QMQMQMQMQM I am QM', 20, 30, 40, 'M');
 
 insert into fc_select(course_id, stu_id, class_num) values(1, 2, 1);
+
+insert into fc_select(course_id, stu_id, class_num) values(3,1,1);
 
 insert into fc_discuss(course_id, topic, serial_num, attend_start, attend_end, contents) 
 values(1, 'How to get GPA4', 1, "2020-11-25T00:00:00", "2020-12-31T00:00:00", 'heheda');
