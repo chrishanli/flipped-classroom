@@ -49,12 +49,49 @@ namespace FCWebApp.Backend.Dao
             return count == 1;
         }
 
+        public static bool isReportAssigned(Int64 aid)
+        {
+            // connect to mysql
+            MySqlConnection conn = DBUtils.GetConnection();
+            conn.Open();
+            string sql = String.Format("SELECT count(*) FROM fc_discuss_material WHERE attend_id={0} AND type=1;"
+                , aid);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            MySqlDataReader reader = comm.ExecuteReader();
+
+            // perform reading
+            int count = 0;
+            if (reader.Read())
+            {
+                count = reader.GetInt32(0);
+            }
+            return count == 1;
+        }
+
         public static bool addFile(long aid, string filename, string origFilename)
         {
             // connect to mysql
             MySqlConnection conn = DBUtils.GetConnection();
             conn.Open();
-            string sql = String.Format("INSERT INTO fc_discuss_material(attend_id, file_name, file_url) VALUES({0}, '{1}', '{2}');"
+            string sql = String.Format("INSERT INTO fc_discuss_material(attend_id, file_name, file_url, type) VALUES({0}, '{1}', '{2}', 0);"
+                , aid, origFilename, filename);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            int affected = comm.ExecuteNonQuery();
+
+            // perform adding
+            if (affected <= 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static bool addReportFile(long aid, string filename, string origFilename)
+        {
+            // connect to mysql
+            MySqlConnection conn = DBUtils.GetConnection();
+            conn.Open();
+            string sql = String.Format("INSERT INTO fc_discuss_material(attend_id, file_name, file_url, type) VALUES({0}, '{1}', '{2}', 1);"
                 , aid, origFilename, filename);
             MySqlCommand comm = new MySqlCommand(sql, conn);
             int affected = comm.ExecuteNonQuery();

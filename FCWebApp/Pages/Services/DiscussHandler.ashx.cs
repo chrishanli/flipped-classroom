@@ -37,6 +37,9 @@ namespace FCWebApp.Pages.Services
                 case "uploadFile": // 在用了
                     uploadFile(context);
                     break;
+                case "uploadReportFile": // 在用了
+                    uploadReportFile(context);
+                    break;
                 case "getUploadedFiles":
                     sid = context.Request.Headers["id"];
                     aid = context.Request.Params["aid"];
@@ -92,6 +95,26 @@ namespace FCWebApp.Pages.Services
                     // 然后，有关数据保存入数据库
                     bool saveOK = DiscussDao.addFile(long.Parse(aid), filenameInDB, filenameBeforeUpload);
                 }
+                context.Response.ContentType = "text/plain";
+                context.Response.Write("File Uploaded Successfully!");
+            }
+            return true;
+        }
+
+        private bool uploadReportFile(HttpContext context)
+        {
+            string aid = context.Request.Headers["aid"];
+            if (context.Request.Files.Count > 0)
+            {
+                HttpFileCollection files = context.Request.Files;
+                // 上传一个文件
+                HttpPostedFile file = files[0];
+                string filenameBeforeUpload = file.FileName;
+                string filenameInDB = Guid.NewGuid().ToString() + Path.GetExtension(filenameBeforeUpload);
+                string fname = context.Server.MapPath("~/UploadFiles/" + filenameInDB);
+                file.SaveAs(fname);
+                // 然后，有关数据保存入数据库
+                bool saveOK = DiscussDao.addReportFile(long.Parse(aid), filenameInDB, filenameBeforeUpload);
                 context.Response.ContentType = "text/plain";
                 context.Response.Write("File Uploaded Successfully!");
             }

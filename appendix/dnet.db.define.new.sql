@@ -73,6 +73,7 @@ CREATE TABLE fc_discuss_material (
     upload_time datetime not null DEFAULT CURRENT_TIMESTAMP,
     file_name varchar(255),
     file_url varchar(255),
+    type tinyint not null,
     foreign key(attend_id) references `fc_discuss_attend`(id)
 ) engine=MyISAM;
 

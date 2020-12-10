@@ -17,9 +17,12 @@ namespace FCWebApp.Pages
         public Int64 discussId;
         public DiscussAttendPo attendInfo;
         public String topic;
+        public bool isReportAssigned = false;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             string id = Request["did"];
+            long stuId = (long) Session["CurrentUserId"];
             if (id == null)
             {
                 Response.Write("<script language='javascript'>");
@@ -32,7 +35,15 @@ namespace FCWebApp.Pages
             // 获取讨论课的主题
             topic = DiscussDao.getDiscussTopic(discussId);
             // 获取报名资料 （如有）
-            attendInfo = DiscussDao.getDiscussAttendInfo(discussId, (long)Session["CurrentUserId"]);
+            attendInfo = DiscussDao.getDiscussAttendInfo(discussId, stuId);
+            if (attendInfo != null)
+            {
+                long attendId = attendInfo.id;
+                // 获取讨论课报名 id
+                this.SqlDataSourceMySQL.SelectParameters["attendId"].DefaultValue = attendId.ToString();
+                // 获取是否提交了讨论课报告
+                this.isReportAssigned = DiscussDao.isReportAssigned(attendId);
+            }
         }
 
         protected void btnSignIn_Click(object sender, EventArgs e)
