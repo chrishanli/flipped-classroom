@@ -164,6 +164,7 @@
     <Content Include="LoginPage.aspx" />
     <Content Include="packages.config" />
     <Content Include="Pages\CourseHomePage.aspx" />
+    <Content Include="Pages\QuestionPage.aspx" />
     <Content Include="Pages\DiscussionHomePage.aspx" />
     <Content Include="Pages\PlatformSettingsPage.aspx" />
     <Content Include="Pages\StudentHomePage.aspx" />
@@ -359,6 +360,13 @@
     </Compile>
     <Compile Include="Pages\CourseHomePage.aspx.designer.cs">
       <DependentUpon>CourseHomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\QuestionPage.aspx.cs">
+      <DependentUpon>QuestionPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\QuestionPage.aspx.designer.cs">
+      <DependentUpon>QuestionPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\DiscussionHomePage.aspx.cs">
       <DependentUpon>DiscussionHomePage.aspx</DependentUpon>

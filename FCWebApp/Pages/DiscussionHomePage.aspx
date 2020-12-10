@@ -19,7 +19,11 @@
                 <asp:BoundField DataField="attend_id" HeaderText="attend_id" SortExpression="attend_id" Visible="False" />
                 <asp:BoundField DataField="question_time" HeaderText="提问时间" SortExpression="question_time" />
                 <asp:BoundField DataField="topic" HeaderText="提问主题" SortExpression="topic" />
-                <asp:TemplateField HeaderText="操作" Visible="false"></asp:TemplateField>
+                <asp:TemplateField HeaderText="操作">
+                    <ItemTemplate>
+                        <asp:HyperLink ID="LinkOpen" runat="server" Text='<%#"查看详情" %>' NavigateUrl='<%# "/Pages/QuestionPage.aspx?qid=" + Eval("id") %>'></asp:HyperLink>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
             <EmptyDataTemplate>
                 <h4>此讨论课还未有任何人发表过任何提问。</h4>
