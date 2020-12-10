@@ -115,6 +115,25 @@ namespace FCWebApp.Backend.Dao
             return true;
         }
 
+        public static bool cancelDiscuss(Int64 did, Int64 sid)
+        {
+            // 取消报名
+            // connect to mysql
+            MySqlConnection conn = DBUtils.GetConnection();
+            conn.Open();
+            string sql = String.Format("DELETE FROM fc_discuss_attend WHERE discuss_id={0} AND stu_id={1};"
+                , did, sid);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            int affected = comm.ExecuteNonQuery();
+
+            // perform reading
+            if (affected <= 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public static DiscussAttendPo getDiscussAttendInfo(Int64 discussId, Int64 stuId)
         {
             // connect to mysql

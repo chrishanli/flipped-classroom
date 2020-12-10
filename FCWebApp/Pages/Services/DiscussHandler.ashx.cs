@@ -65,7 +65,12 @@ namespace FCWebApp.Pages.Services
 
         private string joinDiscuss(long stuId, long discussId)
         {
-            return "";
+            bool isJoined = DiscussDao.attend(discussId, stuId);
+            if (isJoined)
+            {
+                return "true";
+            }
+            return "false";
         }
 
 

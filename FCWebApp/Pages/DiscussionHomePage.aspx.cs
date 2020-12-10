@@ -35,6 +35,28 @@ namespace FCWebApp.Pages
             attendInfo = DiscussDao.getDiscussAttendInfo(discussId, (long)Session["CurrentUserId"]);
         }
 
+        protected void btnSignIn_Click(object sender, EventArgs e)
+        {
+            // 点击了 报名讨论课 按钮
+            bool isJoined = DiscussDao.attend(discussId, (long)Session["CurrentUserId"]);
+            if (isJoined)
+            {
+                // 报名成功
+                Response.Write(String.Format("<script>alert('报名成功。');location.href='/Pages/DiscussionHomePage.aspx?did={0}';</script>", this.discussId));
+            }
+        }
+
+        protected void btnSignOutDiscuss_Click(object sender, EventArgs e)
+        {
+            // 点击了 取消报名讨论课 按钮
+            bool isJoined = DiscussDao.cancelDiscuss(discussId, (long)Session["CurrentUserId"]);
+            if (isJoined)
+            {
+                // 取消报名成功
+                Response.Write(String.Format("<script>alert('取消报名成功。');location.href='/Pages/DiscussionHomePage.aspx?did={0}';</script>", this.discussId));
+            }
+        }
+
         /*
          * ASP 的上传文件方法 不用了 现在用 ajax
          * 
