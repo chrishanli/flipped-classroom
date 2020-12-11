@@ -163,6 +163,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="LoginPage.aspx" />
     <Content Include="packages.config" />
+    <Content Include="Pages\FindPasswordPage.aspx" />
     <Content Include="Pages\CourseHomePage.aspx" />
     <Content Include="Pages\QuestionPage.aspx" />
     <Content Include="Pages\DiscussionHomePage.aspx" />
@@ -353,6 +354,13 @@
     </Compile>
     <Compile Include="LoginPage.aspx.designer.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FindPasswordPage.aspx.cs">
+      <DependentUpon>FindPasswordPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\FindPasswordPage.aspx.designer.cs">
+      <DependentUpon>FindPasswordPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\CourseHomePage.aspx.cs">
       <DependentUpon>CourseHomePage.aspx</DependentUpon>

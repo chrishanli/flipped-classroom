@@ -35,7 +35,7 @@
 
 								<div class="form-group">
 									<label for="password">Password
-										<a href="forgot.html" class="float-right">
+										<a href="Pages/FindPasswordPage.aspx" class="float-right">
 											Forgot Password?
 										</a>
 									</label>

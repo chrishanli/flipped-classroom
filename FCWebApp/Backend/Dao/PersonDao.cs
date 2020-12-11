@@ -44,6 +44,33 @@ namespace FCBackend.Dao
             return lcp;
         }
 
+        public static PersonPo getUser(string username)
+        {
+            // 查找数据库有没有这个人，有就返回
+            // connect to mysql
+            MySqlConnection conn = DBUtils.GetConnection();
+            conn.Open();
+            string sql = String.Format("SELECT id, type, username, alias, email, status, password FROM fc_user WHERE username='{0}';"
+                , username);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            MySqlDataReader reader = comm.ExecuteReader();
+
+            // perform reading
+            PersonPo po = null;
+            if (reader.Read())
+            {
+                po = new PersonPo();
+                po.id = reader.GetInt64(0);
+                po.type = reader.GetString(1);
+                po.username = reader.GetString(2);
+                po.alias = reader.GetString(3);
+                po.email = reader.GetString(4);
+                po.status = reader.GetString(5);
+                po.password = reader.GetString(6);
+            }
+            return po;
+        }
+
         public static PersonPo getUser(string username, string password)
         {
             // 查找数据库有没有这个人，有就返回

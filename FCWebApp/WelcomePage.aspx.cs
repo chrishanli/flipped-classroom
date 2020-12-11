@@ -11,6 +11,11 @@ namespace FCWebApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // 检查有没有登入
+            if (Session["CurrentUserId"] == null)
+            {
+                Response.Redirect("~/LoginPage.aspx");
+            }
             // 检查是不是还没有激活
             if ((string)Session["CurrentUserStatus"] == "N")
             {

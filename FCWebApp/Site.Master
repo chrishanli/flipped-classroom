@@ -31,10 +31,15 @@
                         <li><a runat="server" href="~/About">About</a></li>
                     </ul>
                     <div class="navbar-text navbar-right">
+                        <% if (isSignedIn())
+                            { %>
                         Signed in as 
                     <a runat="server" href="~/Pages/StudentPersonalCentrePage.aspx" class="navbar-link"><%=Session["CurrentUserAlias"]%></a>
                         | 
                     <asp:LinkButton ID="logoutButton" CssClass="navbar-link" runat="server" OnClick="Logout_Click" Text="Log Out" />
+                        <% } else { %>
+                        你还未登入。
+                        <% } %>
                     </div>
                 </div>
             </div>

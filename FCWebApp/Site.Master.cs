@@ -24,10 +24,13 @@ namespace FCWebApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["CurrentUserId"] == null)
-            {
-                Response.Redirect("~/LoginPage.aspx");
-            }
+            
+        }
+
+        protected bool isSignedIn()
+        {
+            object alias = Session["CurrentUserAlias"];
+            return alias != null;
         }
 
         protected void Logout_Click(object sender, EventArgs e)
